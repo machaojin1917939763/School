@@ -1,0 +1,16 @@
+person:
+  id: 1
+  name: "蔡徐坤"
+#  hobby: ["唱","跳","RAP","篮球"] 另外一种写法
+  hobby:
+    - "1"
+    - "2"
+    - "3"
+
+  family: "鸡鸡家族"
+  map:
+    like: "1"
+    nihao: "2"
+  pat:
+    type: dog
+    name: dog

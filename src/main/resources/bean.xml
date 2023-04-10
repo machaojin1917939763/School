@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+<!--    把类添加到Spring的容器中-->
+    <bean id="service" class="com.school.config.MyService">
+<!--        注入属性，需要有get和Set方法-->
+        <property name="name" value="张三"/>
+        <property name="hobby" ref="hobby"/>
+        <property name="skill" ref="skill"/>
+    </bean>
+<!--    系统类的加载-->
+    <bean id="hobby" class="java.util.ArrayList">
+        <constructor-arg>
+            <list>
+                <value>抽烟</value>
+                <value>喝酒</value>
+                <value>烫头</value>
+            </list>
+        </constructor-arg>
+    </bean>
+
+    <bean id="skill" class="java.util.HashMap">
+        <constructor-arg>
+            <map>
+                <entry key="JAVA" value="熟练"/>
+                <entry key="VUE" value="熟练"/>
+            </map>
+        </constructor-arg>
+    </bean>
+</beans>
