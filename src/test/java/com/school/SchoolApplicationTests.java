@@ -4,9 +4,13 @@ import com.school.config.MyService;
 import com.school.domain.MyProperties;
 import com.school.domain.Person;
 import com.school.domain.Pet;
+import com.school.domain.TComment;
+import com.school.mapper.CommentMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.List;
 
 @SpringBootTest
 class SchoolApplicationTests {
@@ -24,6 +28,8 @@ class SchoolApplicationTests {
 
     @Autowired
     private ProfileConfig config;
+
+
 
     @Test
     void contextLoads() {
@@ -45,5 +51,6 @@ class SchoolApplicationTests {
     void proFile(){
         System.out.println(config);
     }
+
 
 }
