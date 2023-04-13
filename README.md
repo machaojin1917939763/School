@@ -2,6 +2,7 @@
 SpringBoot练习
 
 这里有老师当天讲的代码，需要交的作业，需要使用的时候，直接在当前项目下的目录下执行`git pull`或者点击右上角 ![img_1.png](doc/img_1.png) 号即可拉取项目
+![img.png](doc/img-4.png)
 
 ## 2023-4-11
 ## 整合MyBatis
