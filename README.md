@@ -1,7 +1,7 @@
 # School
 SpringBoot练习
 
-这里有老师当天讲的代码，需要交的作业，需要使用的时候，直接在当前项目下的目录下执行`git pull`或者点击右上角 ![img_1.png](img_1.png) 号即可拉取项目
+这里有老师当天讲的代码，需要交的作业，需要使用的时候，直接在当前项目下的目录下执行`git pull`或者点击右上角 ![img_1.png](doc/img_1.png) 号即可拉取项目
 
 ## 2023-4-11
 ## 整合MyBatis
@@ -221,6 +221,316 @@ public class MyBatisTest {
     @Test
     void delete(){
         System.out.println(commentMapper.delete(6) == 1 ? "删除成功" : "删除失败");
+    }
+
+}
+
+```
+
+## 2023-4-13
+演示基于XMl配置文件的形式使用MyBatis
+
+什么东西都不要加
+
+步骤一：在resources目录下添加两个配置文件
+
+![img.png](doc/img-1.png)
+
+mybatis.xml
+```xml
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.school.mapper.CommentMapper">
+
+    <resultMap id="comment" type="com.school.domain.TComment">
+        <id property="id" column="id"/>
+        <result property="aId" column="a_id"/>
+        <result property="author" column="author"/>
+        <result property="content" column="content" />
+    </resultMap>
+
+    <insert id="addXml">
+        insert into t_comment value (#{comment.id},#{comment.content},#{comment.author},#{comment.aId})
+    </insert>
+
+    <update id="updateXml">
+        update t_comment set author = #{author} where id = #{id}
+    </update>
+
+    <delete id="deleteXml" parameterType="integer">
+        delete from t_comment where id = #{id}
+    </delete>
+
+    <select id="getListXml" resultMap="comment">
+        select * from t_comment
+    </select>
+</mapper>
+```
+TArticleMapper.xml
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.school.mapper.TArticleMapper">
+
+    <resultMap id="BaseResultMap" type="com.school.domain.TArticle">
+            <id property="id" column="id" jdbcType="INTEGER"/>
+            <result property="title" column="title" jdbcType="VARCHAR"/>
+            <result property="content" column="content" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <insert id="addXml" parameterType="com.school.domain.TArticle">
+        insert into t_article value (#{article.id},#{article.title},#{article.content})
+    </insert>
+    <update id="updateXml">
+        update t_article set title = #{title} where id = #{id}
+    </update>
+    <delete id="deleteXml">
+        delete from t_article where id = #{id}
+    </delete>
+    <select id="getListXml" resultMap="BaseResultMap">
+        select * from t_article
+    </select>
+
+</mapper>
+
+```
+在domain包下添加TArticle类，在mapper包下添加TArticleMapper接口
+
+![img.png](doc/img-2.png)
+
+TArticle
+```java
+package com.school.domain;
+
+import java.io.Serializable;
+
+public class TArticle implements Serializable {
+    /**
+     * 文章id
+     */
+    private Integer id;
+
+    /**
+     * 文章标题
+     */
+    private String title;
+
+    /**
+     * 文章内容
+     */
+    private String content;
+
+    private static final long serialVersionUID = 1L;
+
+    /**
+     * 文章id
+     */
+    public Integer getId() {
+        return id;
+    }
+
+    /**
+     * 文章id
+     */
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    /**
+     * 文章标题
+     */
+    public String getTitle() {
+        return title;
+    }
+
+    /**
+     * 文章标题
+     */
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    /**
+     * 文章内容
+     */
+    public String getContent() {
+        return content;
+    }
+
+    /**
+     * 文章内容
+     */
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    @Override
+    public boolean equals(Object that) {
+        if (this == that) {
+            return true;
+        }
+        if (that == null) {
+            return false;
+        }
+        if (getClass() != that.getClass()) {
+            return false;
+        }
+        TArticle other = (TArticle) that;
+        return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
+            && (this.getTitle() == null ? other.getTitle() == null : this.getTitle().equals(other.getTitle()))
+            && (this.getContent() == null ? other.getContent() == null : this.getContent().equals(other.getContent()));
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
+        result = prime * result + ((getTitle() == null) ? 0 : getTitle().hashCode());
+        result = prime * result + ((getContent() == null) ? 0 : getContent().hashCode());
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", id=").append(id);
+        sb.append(", title=").append(title);
+        sb.append(", content=").append(content);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
+        sb.append("]");
+        return sb.toString();
+    }
+}
+```
+
+TArticleMapper
+```java
+package com.school.mapper;
+
+import com.school.domain.TArticle;
+import org.apache.ibatis.annotations.*;
+
+import java.util.List;
+
+@Mapper
+public interface TArticleMapper{
+    //以下是基于注解
+    @Select("select * from t_article")
+    public List<TArticle> getList();
+
+    @Insert("insert into t_article value (#{article.id},#{article.title},#{article.content})")
+    public int add(@Param("article") TArticle article);
+
+    @Update("update t_article set title = #{title} where id = #{id}")
+    public int update(@Param("title") String title,@Param("id")Integer id);
+
+    @Delete("delete from t_article where id = #{id}")
+    public int delete(@Param("id") Integer id);
+    //以下是基于xml配置文件的
+    public List<TArticle> getListXml();
+
+    public int addXml(@Param("article")TArticle article);
+
+    public int updateXml(@Param("author")String author,@Param("id")Integer id);
+
+    public int deleteXml(@Param("id")Integer id);
+
+}
+
+
+
+
+
+```
+
+添加测试方法分别对两个表的xml配置方式进行测试
+
+![img.png](doc/img-3.png)
+
+MyBatisArticleTest
+
+```java
+package com.school;
+
+import com.school.mapper.TArticleMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+
+
+@SpringBootTest
+public class MyBatisArticleTest {
+    @Autowired
+    private TArticleMapper mapper;
+
+    //增删改查,有兴趣自己写
+
+}
+
+```
+
+MyBatisXmlTest
+
+```java
+package com.school;
+
+import com.school.domain.TComment;
+import com.school.mapper.CommentMapper;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.Random;
+
+@SpringBootTest
+public class MyBatisXmlTest {
+
+    @Autowired
+    private CommentMapper mapper;
+
+    /**
+     * 查询测试
+     */
+    @Test
+    void list(){
+        mapper.getList().forEach((System.out::println));
+    }
+
+    /**
+     * 添加测试
+     */
+    @Test
+    void add(){
+        TComment comment = new TComment();
+        comment.setaId(new Random().nextInt());
+        comment.setContent("这是文章的内容,基于XMl配置文件");
+        comment.setAuthor("马超金");
+        comment.setaId(new Random().nextInt());
+        System.out.println(mapper.add(comment) == 1 ? "插入成功" : "插入失败");
+    }
+
+    /**
+     * 修改测试
+     */
+    @Test
+    void update(){
+        System.out.println(mapper.update("修改后的作者",6) == 1 ? "修改成功" : "修改失败");
+    }
+
+    /**
+     * 修改测试
+     */
+    @Test
+    void delete(){
+        System.out.println(mapper.delete(6) == 1 ? "删除成功" : "删除失败");
     }
 
 }

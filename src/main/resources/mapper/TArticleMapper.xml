@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.school.mapper.TArticleMapper">
+
+    <resultMap id="BaseResultMap" type="com.school.domain.TArticle">
+            <id property="id" column="id" jdbcType="INTEGER"/>
+            <result property="title" column="title" jdbcType="VARCHAR"/>
+            <result property="content" column="content" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <insert id="addXml" parameterType="com.school.domain.TArticle">
+        insert into t_article value (#{article.id},#{article.title},#{article.content})
+    </insert>
+    <update id="updateXml">
+        update t_article set title = #{title} where id = #{id}
+    </update>
+    <delete id="deleteXml">
+        delete from t_article where id = #{id}
+    </delete>
+    <select id="getListXml" resultMap="BaseResultMap">
+        select * from t_article
+    </select>
+
+</mapper>

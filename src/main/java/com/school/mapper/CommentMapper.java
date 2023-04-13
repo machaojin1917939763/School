@@ -9,6 +9,7 @@ import java.util.List;
 @Mapper
 public interface CommentMapper {
 
+    //以下是基于注解
     @Select("select * from t_comment")
     public List<TComment> getList();
 
@@ -20,4 +21,12 @@ public interface CommentMapper {
 
     @Delete("delete from t_comment where id = #{id}")
     public int delete(@Param("id") Integer id);
+    //以下是基于xml配置文件的
+    public List<TComment> getListXml();
+
+    public int addXml(@Param("comment")TComment comment);
+
+    public int updateXml(@Param("author")String author,@Param("id")Integer id);
+
+    public int deleteXml(@Param("id")Integer id);
 }
