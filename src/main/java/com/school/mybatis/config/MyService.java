@@ -1,4 +1,4 @@
-package com.school.config;
+package com.school.mybatis.config;
 
 import java.util.List;
 import java.util.Map;

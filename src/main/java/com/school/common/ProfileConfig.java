@@ -1,4 +1,4 @@
-package com.school;
+package com.school.common;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;

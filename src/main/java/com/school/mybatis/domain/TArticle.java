@@ -1,4 +1,4 @@
-package com.school.domain;
+package com.school.mybatis.domain;
 
 import java.io.Serializable;
 

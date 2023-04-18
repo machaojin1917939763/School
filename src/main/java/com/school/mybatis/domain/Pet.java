@@ -1,4 +1,4 @@
-package com.school.domain;
+package com.school.mybatis.domain;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;

@@ -1,6 +1,6 @@
-package com.school.mapper;
+package com.school.mybatis.mapper;
 
-import com.school.domain.TArticle;
+import com.school.mybatis.domain.TArticle;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;

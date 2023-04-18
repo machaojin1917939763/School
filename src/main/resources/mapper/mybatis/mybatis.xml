@@ -3,9 +3,9 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.school.mapper.CommentMapper">
+<mapper namespace="com.school.mybatis.mapper.CommentMapper">
 
-    <resultMap id="comment" type="com.school.domain.TComment">
+    <resultMap id="comment" type="com.school.mybatis.domain.TComment">
         <id property="id" column="id"/>
         <result property="aId" column="a_id"/>
         <result property="author" column="author"/>

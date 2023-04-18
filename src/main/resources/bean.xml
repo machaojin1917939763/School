@@ -5,7 +5,7 @@
 
 
 <!--    把类添加到Spring的容器中-->
-    <bean id="service" class="com.school.config.MyService">
+    <bean id="service" class="com.school.mybatis.config.MyService">
 <!--        注入属性，需要有get和Set方法-->
         <property name="name" value="张三"/>
         <property name="hobby" ref="hobby"/>

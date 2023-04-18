@@ -1,6 +1,6 @@
-package com.school;
+package com.school.mtbatis;
 
-import com.school.mapper.TArticleMapper;
+import com.school.mybatis.mapper.TArticleMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 

@@ -1,16 +1,13 @@
-package com.school;
+package com.school.mtbatis;
 
-import com.school.config.MyService;
-import com.school.domain.MyProperties;
-import com.school.domain.Person;
-import com.school.domain.Pet;
-import com.school.domain.TComment;
-import com.school.mapper.CommentMapper;
+import com.school.common.ProfileConfig;
+import com.school.mybatis.config.MyService;
+import com.school.mybatis.domain.MyProperties;
+import com.school.mybatis.domain.Person;
+import com.school.mybatis.domain.Pet;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import java.util.List;
 
 @SpringBootTest
 class SchoolApplicationTests {

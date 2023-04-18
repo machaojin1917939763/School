@@ -1,7 +1,7 @@
-package com.school;
+package com.school.mtbatis;
 
-import com.school.domain.TComment;
-import com.school.mapper.CommentMapper;
+import com.school.mybatis.domain.TComment;
+import com.school.mybatis.mapper.CommentMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -1,7 +1,7 @@
-package com.school.mapper;
+package com.school.mybatis.mapper;
 
 
-import com.school.domain.TComment;
+import com.school.mybatis.domain.TComment;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
