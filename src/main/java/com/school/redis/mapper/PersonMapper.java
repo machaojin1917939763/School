@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.data.redis.repository.configuration.EnableRedisRepositories;
 
 
-public interface PersonMapper extends JpaRepository<Person, Long> {
+public interface PersonMapper extends JpaRepository<Person, String> {
 }

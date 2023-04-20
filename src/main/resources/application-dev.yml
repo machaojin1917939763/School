@@ -14,6 +14,9 @@ spring:
         max-active: 8
         max-idle: 8
         max-wait: 1ms
+  thymeleaf:
+    cache: false
+    mode: HTML5
 mybatis:
   configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    log-impl: org.apache.ibatis.logging.jdk14.Jdk14LoggingImpl

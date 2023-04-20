@@ -2,9 +2,6 @@ package com.school.jpa.mapper;
 
 import com.school.jpa.domain.TArticle;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import java.util.List;
 
@@ -16,6 +13,5 @@ import java.util.List;
 */
 
 
-public interface TArticleMapper extends JpaRepository<TArticle,Long> {
-
+public interface TArticleMapper extends JpaRepository<TArticle, String> {
 }
