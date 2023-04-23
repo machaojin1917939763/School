@@ -131,7 +131,7 @@ public class TComment implements Serializable {
 
 ```
 ### Mapper类创建
-在`school`包下新建`mapper`包，在`mapper`包下新建`CommentMapper`类
+在`school`包下新建`mapper`包，在`mapper`包下新建`com.school.thymeleaf.mapper.CommentMapper`类
 在类中添加以下内容
 
 ```java
@@ -144,7 +144,7 @@ import org.apache.ibatis.annotations.*;
 import java.util.List;
 
 @Mapper
-public interface CommentMapper {
+public interface com.school.thymeleaf.mapper.CommentMapper {
 
     @Select("select * from t_comment")
     public List<TComment> getList();
@@ -175,7 +175,7 @@ public interface CommentMapper {
 package com.school;
 
 import com.school.mybatis.domain.TComment;
-import com.school.mybatis.mapper.CommentMapper;
+import com.school.mybatis.mapper.com.school.thymeleaf.mapper.CommentMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -187,7 +187,7 @@ import java.util.Random;
 public class MyBatisTest {
     //数据库的增删改查
     @Autowired
-    private CommentMapper commentMapper;
+    private com.school.thymeleaf.mapper.CommentMapper commentMapper;
 
     /**
      * 查询全部测试
@@ -248,7 +248,7 @@ mybatis.xml
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.school.mybatis.mapper.CommentMapper">
+<mapper namespace="com.school.mybatis.mapper.com.school.thymeleaf.mapper.CommentMapper">
 
     <resultMap id="comment" type="com.school.mybatis.domain.TComment">
         <id property="id" column="id"/>
@@ -491,7 +491,7 @@ MyBatisXmlTest
 package com.school;
 
 import com.school.mybatis.domain.TComment;
-import com.school.mybatis.mapper.CommentMapper;
+import com.school.mybatis.mapper.com.school.thymeleaf.mapper.CommentMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -502,7 +502,7 @@ import java.util.Random;
 public class MyBatisXmlTest {
 
     @Autowired
-    private CommentMapper mapper;
+    private com.school.thymeleaf.mapper.CommentMapper mapper;
 
     /**
      * 查询测试

@@ -1,0 +1,129 @@
+html {
+    --c: #0f3c8d;  /* NASA配色 */
+		--cLogo: #eb2a21;
+		--cFont: #0f181d;
+}
+header {
+	background-color: #FFFFFF;
+	top: 0;
+	width: 100%;
+	position: fixed;
+	border-bottom: solid 5px var(--c);
+	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+a {
+	color: var(--c);
+}
+.navbar {
+	display: flex;
+	width: 1180px;
+	margin: 0 auto;
+	padding: 15px 0;
+	align-items: center;
+}
+
+.collapse {
+	display: flex;
+	flex-grow: 1;
+}
+
+.links ul {
+	display: flex;
+	margin-right: auto;
+}
+
+.links li {
+	margin: 0 10px;
+}
+
+.links a {
+	color: var(--cFont);
+}
+
+.links a:hover {
+	color: var(--c);
+	font-weight: bold;
+}
+
+.logo {
+	color: var(--cLogo);
+	font-weight: bold;
+	margin-right: 20px;
+	font-size: 18px;
+}
+
+.form {
+	color: var(--c);
+}
+.form a {
+	border: solid 1px var(--c);
+	border-radius: 8px;
+	padding: 4px 14px;
+}
+
+.form-bg {
+	background-color: var(--c);
+	color: #FFFFFF;
+}
+
+.navbar label {
+	display: none;
+}
+
+.navbar input {
+	display: none;
+}
+
+@media only screen and (max-width: 960px) {
+	.navbar {
+		flex-flow: row wrap;
+	}
+
+	.collapse,
+	.form {
+		display: none;
+		flex-flow: column;
+		width: 100%;
+		margin: 8px 0;
+	}
+
+	.navbar label {
+		border: solid 1px var(--c);
+		padding: 1.5px 12px;
+		color: var(--c);
+		cursor: pointer;
+		border-radius: 5px;
+	}
+
+	.logo {
+		margin-right: auto;
+	}
+
+	.links ul {
+		flex-direction: column;
+		margin: 8px, 0;
+	}
+
+	.links ul li {
+		margin: 8px 0;
+	}
+
+	.navbar label {
+		display: block;
+	}
+
+	#check:checked~.collapse {
+		display: block;
+	}
+
+	#check:checked~.form {
+		display: block;
+		
+	}
+
+	#check:checked~label {
+		color: #fff;
+		background-color: var(--c);
+	}
+
+}

@@ -1,9 +1,10 @@
 spring:
   datasource:
     druid:
+      #下面的内容不需要修改，这些都是我的远程数据库
       username: root
       password: machaojin
-      url: jdbc:mysql://localhost:3306/spring-boot?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&useSSL=true
+      url: jdbc:mysql://101.42.149.76:3306/boke?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&useSSL=true
       driver-class-name: com.mysql.cj.jdbc.Driver
   redis:
     port: 6379
@@ -20,6 +21,9 @@ spring:
     #配置i18n文件
   messages:
     basename: i18n/login
-mybatis:
+  mvc:
+    format:
+      time: HH:mm:ss
+mybatis-plus:
   configuration:
-    log-impl: org.apache.ibatis.logging.jdk14.Jdk14LoggingImpl
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

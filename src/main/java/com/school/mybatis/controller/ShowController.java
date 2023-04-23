@@ -6,9 +6,5 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class ShowController {
-    @RequestMapping({"/","/login","/login.html"})
-    public ModelAndView toIndex(ModelAndView modelAndView){
-        modelAndView.setViewName("login");
-        return modelAndView;
-    }
+
 }

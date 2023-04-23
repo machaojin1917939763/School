@@ -1,0 +1,48 @@
+@import url("navbar.css");
+@import url("text.css");
+@import url("small-x.css") only screen and (max-width: 768px);
+@import url("small.css") only screen and (min-width: 768px);
+@import url("medium.css") only screen and (min-width: 960px);
+@import url("big.css") only screen and (min-width: 1200px);
+
+html {
+	height: 1000px;
+}
+* {padding: 0; margin: 0;}
+a {
+	text-decoration: none;
+}
+ul {
+	list-style: none;
+}
+.card {
+	margin:0 20px;
+	border: solid 1px #ddd;
+	box-shadow: 0 0 5px rgba(0, 0, 0, .1);
+	border-radius: 8px;
+}
+.card-header {
+	padding: 7.5px 10px;
+	border-bottom: solid 1px #ddd;
+}
+.card-body {
+	padding: 0 10px 0 10px;
+}
+.card-footer {
+	padding: 10px;
+	border-top: solid 1px #ddd;
+}
+.theme {
+	line-height:50px;
+	font-size: 10px;
+	text-align:center;
+}
+.theme img {
+	width: 50px;
+	cursor: pointer;
+}
+.row {
+	display: grid;
+	grid-template-columns: repeat(12, 1fr);
+	gap: 10px;
+}

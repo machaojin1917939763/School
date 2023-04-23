@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        .title {
+            font-size: 32px;
+            font-weight: bold;
+            color: #333333;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .meta {
+            font-size: 14px;
+            color: #999999;
+            margin-bottom: 20px;
+            text-align: right;
+        }
+
+        .content {
+            font-size: 16px;
+            color: #333333;
+            line-height: 1.5;
+        }
+
+        .comment {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #eeeeee;
+        }
+
+        .comment-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333333;
+            margin-bottom: 10px;
+        }
+
+        .comment-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .comment-item {
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed #eeeeee;
+        }
+
+        .comment-author {
+            font-size: 14px;
+            font-weight: bold;
+            color: #333333;
+        }
+
+        .comment-time {
+            font-size: 12px;
+            color: #999999;
+        }
+
+        .comment-content {
+            font-size: 14px;
+            color: #333333;
+        }
+    </style>
+    <title th:text="${article.getTitle()}"></title>
+    <link rel="stylesheet" type="text/css" href="/css/common.css" />
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <style type="text/css">
+        header {
+            border-bottom: soild 5px #00FFFF;
+        }
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            /* 设定高度、背景色、内边距和边框等样式 */
+            height: 60px;
+            background-color: #333;
+            padding: 0 20px;
+            box-sizing: border-box;
+            border-bottom: 1px solid #ddd;
+            width: 100%;
+        }
+        .navbar a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+<header class="">
+    <div class="navbar" style="display: flex; align-items: center;">
+        <a href="" class="logo" style="flex: 1;color: #eb2a21"><i class="fa fa-github"></i>[[${username}]]</a>
+        <div class="collapse" style="flex: 2.5;">
+            <div class="links">
+                <ul>
+                    <li th:each="menu, i : ${menuList}">
+                        <a th:href="${menu.url}" th:text="${menu.menuName}"></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="form" th:if="${username != null}" style="flex: 0.5;">
+            欢迎：[[ ${username} ]]
+            <a href="/login">退出登录</a>
+        </div>
+        <div class="form" th:if="${username == null}" style="flex: 0.5;">
+            <a href="/login">登录</a>
+            <a href="/login" class="form-bg">注册</a>
+        </div>
+    </div>
+
+</header>
+
+<div style="height: 80px;"></div>
+<div class="container">
+    <div class="title" th:text="${article.getTitle()}">我的博客文章标题</div>
+    <span th:text="${article.getComments().size()}"></span>
+    <div class="meta">作者：[[${article.getTypeId()}]] | 创建时间：[[${article.getTime()}]]</div>
+    <div class="content" th:text="${article.getContent()}">
+    </div>
+    <div class="comment">
+        <div class="comment-title">评论（[[${article.getComments().size()}]]）</div>
+        <ul class="comment-list">
+            <li class="comment-item" th:each="comm:${article.getComments()}">
+                <div class="comment-author" th:text="${comm.getPerson()}">张三</div>
+                <div class="comment-time" th:text="${comm.getTime()}">2023-04-23 18:00</div>
+                <div class="comment-content" th:text="${comm.getComment()}">这篇文章写得很好，赞一个！</div>
+            </li>
+        </ul>
+    </div>
+</div>
+</body>
+<script src="/js/jquery-3.5.1.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="/js/cookies.js" type="text/javascript" charset="utf-8"></script>
+<script src="/js/main.js" type="text/javascript" charset="utf-8"></script>
+</html>

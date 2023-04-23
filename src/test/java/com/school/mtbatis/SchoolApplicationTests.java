@@ -5,6 +5,7 @@ import com.school.mybatis.config.MyService;
 import com.school.mybatis.domain.MyProperties;
 import com.school.mybatis.domain.Person;
 import com.school.mybatis.domain.Pet;
+import com.school.thymeleaf.interceptor.Whitelist;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -46,8 +47,11 @@ class SchoolApplicationTests {
 
     @Test
     void proFile(){
-        System.out.println(config);
+        System.out.println(whitelist);
     }
+
+    @Autowired
+    Whitelist whitelist;
 
 
 }
