@@ -19,7 +19,6 @@ import java.util.List;
 @Component
 public class AllRequest implements HandlerInterceptor {
 
-    @Autowired
     Whitelist whitelist;
 
     public AllRequest(Whitelist whitelist) {
@@ -27,6 +26,14 @@ public class AllRequest implements HandlerInterceptor {
     }
 
 
+    /**
+     * 判断有没有登录，没有登录就直接打回
+     * @param request current HTTP request
+     * @param response current HTTP response
+     * @param handler chosen handler to execute, for type and/or instance evaluation
+     * @return
+     * @throws Exception
+     */
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         HttpSession session = request.getSession();
@@ -34,8 +41,12 @@ public class AllRequest implements HandlerInterceptor {
         System.out.println("执行拦截器方法！");
         System.out.println(username);
         String requestURI = request.getRequestURI();
+
+
         log.info("请求的路径---{}",requestURI);
         log.info("白名单--{}",whitelist);
+
+
         //白名单放行
         //判断里面是和否有静态资源
         if (eqs(eql(requestURI),whitelist.getStaticUrl())){
@@ -47,6 +58,7 @@ public class AllRequest implements HandlerInterceptor {
         }
         if (username == null){
             // 如果未登录，将请求重定向到登录页
+            log.info("未通过--{}",requestURI);
             response.sendRedirect("/login");
             return false;
         }
@@ -113,6 +125,9 @@ public class AllRequest implements HandlerInterceptor {
         }
         if (a.contains("404")){
             return "404";
+        }
+        if (a.contains("markdown")){
+            return "markdown";
         }
         return a;
     }

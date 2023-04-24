@@ -23,7 +23,7 @@ public class ArticleVo {
 
     private String userId;
 
-    private Integer typeId;
+    private String typeId;
 
     private String time;
 

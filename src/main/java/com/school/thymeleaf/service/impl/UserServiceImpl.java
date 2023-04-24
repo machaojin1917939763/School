@@ -1,6 +1,8 @@
 package com.school.thymeleaf.service.impl;
 
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.TypeReference;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.school.thymeleaf.domain.Article;
@@ -12,6 +14,7 @@ import com.school.thymeleaf.mapper.UserMapper;
 import com.school.thymeleaf.mapper.UserMapper;
 import com.school.thymeleaf.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 import org.thymeleaf.util.StringUtils;
@@ -40,6 +43,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
     @Autowired
     private MenuService menuService;
 
+    @Autowired
+    private RedisTemplate<String,String> redisTemplate;
+
     @Override
     public ModelAndView toLogin(String username, String password, ModelAndView modelAndView, HttpServletRequest request) {
             HttpSession session = request.getSession();
@@ -56,26 +62,45 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
                 //设置用户名
                 modelAndView.addObject("username", one.getNickName());
                 //查询所有文章
-                List<Article> list = articleService.list(new LambdaQueryWrapper<Article>().orderByAsc(Article::getTime));
+                String s = redisTemplate.opsForValue().get("school:article:all");
+                List<Article> list;
+                if (!StringUtils.isEmpty(s)){
+                    System.out.println("zouRedis");
+                    list = JSON.parseArray(s,Article.class);
+                }else {
+                    list = articleService.list(new LambdaQueryWrapper<Article>().orderByAsc(Article::getTime));
+                    redisTemplate.opsForValue().set("school:article:all",JSON.toJSONString(list));
+                }
+
+
                 //按照文章分类传递给前端
                 HashMap<String, List<Article>> map = new HashMap<>();
-                list.forEach((article -> {
-                    Type type = typeService.getById(article.getTypeId());
-                    if (type != null) {
-                        if (!map.containsKey(type.getName())) {
+
+                String typeList = redisTemplate.opsForValue().get("school:article:map");
+                if(StringUtils.isEmpty(typeList)) {
+                    HashMap<String, List<Article>> finalMap = map;
+                    list.forEach((article -> {
+                        Type type = typeService.getById(article.getTypeId());
+                        if (type != null) {
+                            if (!finalMap.containsKey(type.getName())) {
+                                List<Article> articles = new ArrayList<>();
+                                articles.add(article);
+                                finalMap.put(type.getName(), articles);
+                            } else {
+                                List<Article> articles = finalMap.get(type.getName());
+                                articles.add(article);
+                            }
+                        } else {
                             List<Article> articles = new ArrayList<>();
                             articles.add(article);
-                            map.put(type.getName(), articles);
-                        } else {
-                            List<Article> articles = map.get(type.getName());
-                            articles.add(article);
+                            finalMap.put(article.getTitle(), articles);
                         }
-                    }else {
-                        List<Article> articles = new ArrayList<>();
-                        articles.add(article);
-                        map.put(article.getTitle(), articles);
-                    }
-                }));
+                    }));
+                    redisTemplate.opsForValue().set("school:article:map",JSON.toJSONString(map));
+                }else {
+                    map = JSON.parseObject(typeList, new TypeReference<HashMap<String, List<Article>>>() {});
+                }
+
                 modelAndView.addObject("article",map);
                 modelAndView.addObject("menuList",menuList);
                 modelAndView.setViewName("index");

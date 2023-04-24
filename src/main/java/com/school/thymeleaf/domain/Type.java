@@ -1,5 +1,7 @@
 package com.school.thymeleaf.domain;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,7 +15,7 @@ import javax.persistence.*;
 @TableName(value = "stu_type")
 public class Type {
 
-    @Id
+    @TableId(value = "id",type = IdType.AUTO)
     private Integer id;
 
     private String name;

@@ -28,7 +28,7 @@ console.log(getCookie("theme"))
 $(".nasa").click(function() {
 	document.cookie = "theme=" + "nasa";
 	$("html").css({
-		"--c": "#eace5f",
+		"--c": "#e37ae7",
 		"--cLogo": "#eb2a21",
 		"--cFont": "#88b9d5"
 	})

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8" />
+  <title>文章编辑页</title>
+  <link rel="stylesheet" th:href="@{/markdown/examples/css/style.css}" />
+  <link rel="stylesheet" th:href="@{/markdown/css/editormd.css}" />
+  <link rel="shortcut icon" href="https://pandao.github.io/editor.md/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" type="text/css" href="/css/common.css" />
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <style type="text/css">
+        header {
+            border-bottom: soild 5px #00FFFF;
+            width: 100%;
+        }
+        .navbar-p {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            /* 设定高度、背景色、内边距和边框等样式 */
+            height: 60px;
+            background-color: #333;
+            padding: 0 20px;
+            box-sizing: border-box;
+            border-bottom: 1px solid #ddd;
+            width: 100%;
+        }
+        .navbar-p a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 16px;
+        }
+        p {
+            text-indent: 2em;
+        }
+        #test-editormd{
+            margin-top: 7%;
+        }
+    </style>
+</head>
+<body>
+<div id="layout">
+  <header style="width: 100%">
+      <div class="navbar-p" style="display: flex; align-items: center;">
+          <a href="" class="logo" style="flex: 1;color: #eb2a21"><i class="fa fa-github"></i>[[${username}]]</a>
+          <div class="collapse" style="flex: 2.5;">
+              <div class="links">
+                  <ul>
+                      <li th:each="menu, i : ${menuList}">
+                          <a th:href="${menu.url}" th:text="${menu.menuName}"></a>
+                      </li>
+                  </ul>
+              </div>
+          </div>
+          <div class="form" th:if="${username != null}" style="flex: 0.75;">
+              欢迎：[[ ${username} ]]
+              <a href="/logout">退出登录</a>
+              <a onclick="getArticle()" class="form-bg">发布</a>
+          </div>
+          <div class="form" th:if="${username == null}" style="flex: 0.5;">
+              <a href="/login">登录</a>
+              <a href="/login" class="form-bg">注册</a>
+          </div>
+      </div>
+      <!--      文章标题-->
+      <input type="text" id="title" placeholder="请输入文章标题" style="width: 100%;height: 50px;font-size: 20px;">
+  </header>
+  <div id="test-editormd">
+                <textarea style="display:none;"></textarea>
+  </div>
+</div>
+<!--写一个按钮，绑定发布文章的单击事件-->
+
+<div class="theme">
+    点击切换主题：
+    <img class="nasa" src="/imgs/nasa.png">
+    <img class="ferrair" src="/imgs/ferrari.jpg">
+    <img class="google" src="/imgs/google.png">
+</div>
+<script th:src="@{/markdown/examples/js/jquery.min.js}"></script>
+<script th:src="@{/markdown/editormd.min.js}"></script>
+<script type="text/javascript">
+  var testEditor;
+  $(function() {
+    testEditor = editormd("test-editormd", {
+      width   : "100%",
+      height  : 770,
+      syncScrolling : "single",
+      path    : "../markdown/lib/"
+    });
+  });
+  //获取textarea内的内容然后发送到后台
+    function getArticle() {
+        var article = testEditor.getMarkdown();
+        var title = document.getElementById("title").value;
+        var data = {
+        "title": title,
+        "content": article
+        };
+        $.ajax({
+        type: "POST",
+        url: "/article/write",
+        data: JSON.stringify(data),
+        contentType: "application/json",
+        dataType: "json",
+        success: function (data) {
+            if (data.code === 200) {
+            alert("发布成功");
+            window.location.href = "/";
+            } else {
+            alert("发布失败");
+            }
+        }
+        });
+    }
+
+</script>
+</body>
+<script src="/js/jquery-3.5.1.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="/js/cookies.js" type="text/javascript" charset="utf-8"></script>
+<script src="/js/main.js" type="text/javascript" charset="utf-8"></script>
+</html>

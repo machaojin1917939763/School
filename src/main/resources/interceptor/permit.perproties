@@ -1,3 +1,0 @@
-#拦截器拦截的路径
-permit.urls=/login, /, /login.html, /toLogin
-permit.staticUrl=/imgs/**,/css/**,/js/**

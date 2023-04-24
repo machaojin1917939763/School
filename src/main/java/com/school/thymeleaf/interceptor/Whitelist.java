@@ -13,7 +13,7 @@ import java.util.List;
 //指定前缀
 @ConfigurationProperties(prefix = "permit")
 //指定配置文件的路径，可以是任意位置
-@PropertySource(value = "classpath:interceptor/permit.perproties",encoding = "utf-8")
+@PropertySource(value = "classpath:interceptor/permit.properties",encoding = "utf-8")
 //开启配置文件的功能
 //@EnableConfigurationProperties(Whitelist.class)
 public class Whitelist {

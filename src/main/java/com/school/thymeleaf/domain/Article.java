@@ -1,5 +1,6 @@
 package com.school.thymeleaf.domain;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -17,7 +18,7 @@ import java.util.Date;
 @TableName(value = "stu_article")
 public class Article {
 
-    @TableId
+    @TableId(value = "id",type = IdType.AUTO)
     private Integer id;
 
     private String title;
