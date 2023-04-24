@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <title th:text="#{login.title}"></title>
     <link rel="stylesheet" type="text/css" href="/css/common.css" />
+    <link rel="icon" href="/imgs/login.jpg" type="image/x-icon">
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <style type="text/css">
         header {
@@ -27,6 +28,9 @@
             text-decoration: none;
             font-size: 16px;
         }
+        p {
+            text-indent: 2em;
+        }
     </style>
 </head>
 <body>
@@ -42,7 +46,7 @@
                 </ul>
             </div>
         </div>
-        <div class="form" th:if="${username != null}" style="flex: 0.75;">
+        <div class="form" th:if="${username != null}" style="flex: 1;">
             欢迎：[[ ${username} ]]
             <a href="/logout">退出登录</a>
             <a href="/toWrite" class="form-bg">写文章</a>
@@ -66,6 +70,8 @@
                     <div class="list-group">
                         <li th:each="com:${map.getValue()}">
                             <a th:href="@{|${@environment.getProperty('my.app.url')}${com.getId()}|}" th:text="${com.getTitle()}"></a>
+                            <a th:href="@{|${@environment.getProperty('my.app.url')}${com.getId()}|}">删除</a>
+                            <a th:href="@{|${@environment.getProperty('my.app.url')}${com.getId()}|}">编辑</a>
                             <span><i class="fa fa-clock-o" aria-hidden="true"></i><span th:text="${com.getTime()}"></span></span>
                         </li>
                     </div>

@@ -29,7 +29,7 @@ public class Article {
     private Integer userId;
 
     @TableField(value = "type_id")
-    private Integer typeId;
+    private String typeId;
 
     private String time;
 

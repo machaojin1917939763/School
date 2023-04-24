@@ -22,6 +22,7 @@ import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Slf4j
 @Controller
@@ -54,15 +55,25 @@ public class ArticleController {
      */
     @PostMapping("/article/write")
     @ResponseBody
+
     public Response addArticle(@RequestBody Article article, ModelAndView modelAndView, HttpServletRequest request){
         Integer username = (Integer) request.getSession().getAttribute("username");
         log.info("提交文章{}",article);
         if(username == null){
             return new Response("请先登录",500);
         }
+
         article.setUserId(username);
         article.setTime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(System.currentTimeMillis()));
-        article.setTypeId(1);
+        Type serviceOne = typeService.getOne(new LambdaQueryWrapper<Type>().eq(!StringUtils.isEmpty(article.getTypeId()), Type::getName, article.getTypeId()));
+        if (serviceOne != null){
+            article.setTypeId(serviceOne.getId().toString());
+        }else {
+            Type type = new Type();
+            type.setName(article.getTypeId());
+            typeService.save(type);
+            article.setTypeId(type.getId().toString());
+        }
         articleService.save(article);
         modelAndView.addObject("code",200);
         log.info("提交文章{}",article);

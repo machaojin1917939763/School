@@ -4,21 +4,24 @@ switch (getCookie("theme")) {
 		$("html").css({
 			"--c": "#e979ee",
 			"--cLogo": "#eb2a21",
-			"--cFont": "#9bc0d5"
+			"--cFont": "#9bc0d5",
+			"--cBg": "#c0fcdc"
 		})
 		break
 	case 'ferrair':
 		$("html").css({
 			"--c": "#0ba046",
 			"--cLogo": "#bf0e2b",
-			"--cFont": "#000000"
+			"--cFont": "#000000",
+			"--cBg": "#dbf5c4"
 		})
 		break
 	case 'google':
 		$("html").css({
 			"--c": "#f4c20d",
 			"--cLogo": "#4885ef",
-			"--cFont": "#db3237"
+			"--cFont": "#db3237",
+			"--cBg": "#ecf8cf"
 		})
 		break
 }
@@ -30,7 +33,8 @@ $(".nasa").click(function() {
 	$("html").css({
 		"--c": "#e37ae7",
 		"--cLogo": "#eb2a21",
-		"--cFont": "#88b9d5"
+		"--cFont": "#88b9d5",
+		"--cBg": "#f6e8fa"
 	})
 })
 $(".ferrair").click(function() {
@@ -38,7 +42,10 @@ $(".ferrair").click(function() {
 	$("html").css({
 		"--c": "#0ba046",
 		"--cLogo": "#bf0e2b",
-		"--cFont": "#000000"
+		"--cFont": "#000000",
+	// 	背景一起换了
+		"--cBg": "#f5edcf"
+
 	})
 })
 $(".google").click(function() {
@@ -46,7 +53,8 @@ $(".google").click(function() {
 	$("html").css({
 		"--c": "#f4c20d",
 		"--cLogo": "#4885ef",
-		"--cFont": "#db3237"
+		"--cFont": "#db3237",
+		"--cBg": "#cefcdb"
 	})
 })
 //调整header的隐藏
