@@ -70,8 +70,8 @@
                     <div class="list-group">
                         <li th:each="com:${map.getValue()}">
                             <a th:href="@{|${@environment.getProperty('my.app.url')}${com.getId()}|}" th:text="${com.getTitle()}"></a>
-                            <a th:href="@{|${@environment.getProperty('my.app.url')}${com.getId()}|}">删除</a>
-                            <a th:href="@{|${@environment.getProperty('my.app.url')}${com.getId()}|}">编辑</a>
+                            <a th:href="@{|${@environment.getProperty('my.app.delete')}${com.getId()}|}">删除</a>
+                            <a th:href="@{|${@environment.getProperty('my.app.update')}${com.getId()}|}">编辑</a>
                             <span><i class="fa fa-clock-o" aria-hidden="true"></i><span th:text="${com.getTime()}"></span></span>
                         </li>
                     </div>

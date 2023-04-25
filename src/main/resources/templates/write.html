@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <title>文章编辑页</title>
-  <link rel="stylesheet" th:href="@{/markdown/examples/css/style.css}" />
-  <link rel="stylesheet" th:href="@{/markdown/css/editormd.css}" />
+  <link rel="stylesheet" href="/markdown/examples/css/style.css" />
+  <link rel="stylesheet" href="/markdown/css/editormd.css" />
     <link rel="icon" href="/imgs/login.jpg" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="/css/common.css" />
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -63,11 +63,11 @@
           </div>
       </div>
       <!--      文章标题-->
-      <input type="text" id="title" placeholder="请输入文章标题" style="width: 50%;height: 50px;font-size: 20px;">
-      <input type="text" id="type" placeholder="请输入文章类型" style="width: 50%;height: 50px;font-size: 20px;float: right">
+      <input type="text" id="title" th:value="${article.getTitle()}" placeholder="请输入文章标题" style="width: 50%;height: 50px;font-size: 20px;">
+      <input type="text" id="type" th:value="${article.getTypeId()}" placeholder="请输入文章类型" style="width: 50%;height: 50px;font-size: 20px;float: right">
   </header>
   <div id="test-editormd">
-      <textarea style="display:none;"></textarea>
+      <textarea style="display:none;" th:text="${article.getContent()}"></textarea>
   </div>
 </div>
 <!--写一个按钮，绑定发布文章的单击事件-->
@@ -78,8 +78,8 @@
     <img class="ferrair" src="/imgs/ferrari.jpg">
     <img class="google" src="/imgs/google.png">
 </div>
-<script th:src="@{/markdown/examples/js/jquery.min.js}"></script>
-<script th:src="@{/markdown/editormd.min.js}"></script>
+<script src="/markdown/examples/js/jquery.min.js"></script>
+<script src="/markdown/editormd.min.js"></script>
 <script type="text/javascript">
   var testEditor;
   $(function() {

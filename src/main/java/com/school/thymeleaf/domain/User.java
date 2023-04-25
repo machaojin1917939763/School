@@ -8,12 +8,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @TableName(value = "stu_user")
-public class User {
+public class User implements Serializable {
 
     @TableId(value = "id",type = IdType.AUTO)
     private Integer id;

@@ -71,11 +71,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
                     list = articleService.list(new LambdaQueryWrapper<Article>().orderByAsc(Article::getTime));
                     redisTemplate.opsForValue().set("school:article:all",JSON.toJSONString(list));
                 }
-
-
                 //按照文章分类传递给前端
                 HashMap<String, List<Article>> map = new HashMap<>();
-
                 String typeList = redisTemplate.opsForValue().get("school:article:map");
                 if(StringUtils.isEmpty(typeList)) {
                     HashMap<String, List<Article>> finalMap = map;
