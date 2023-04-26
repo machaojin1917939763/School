@@ -1,24 +1,15 @@
 package com.school.thymeleaf.controller;
 
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.school.thymeleaf.domain.Article;
-import com.school.thymeleaf.domain.Menu;
-import com.school.thymeleaf.domain.Type;
 import com.school.thymeleaf.domain.User;
-import com.school.thymeleaf.service.ArticleService;
-import com.school.thymeleaf.service.MenuService;
-import com.school.thymeleaf.service.TypeService;
 import com.school.thymeleaf.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import org.thymeleaf.util.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.*;
 
 @Controller
 public class LoginController {

@@ -43,7 +43,7 @@
   <header style="width: 100%">
       <div class="navbar-p" style="display: flex; align-items: center;">
           <a href="" class="logo" style="flex: 1;color: #eb2a21"><i class="fa fa-github"></i>[[${username}]]</a>
-          <div class="collapse" style="flex: 2.5;">
+          <div class="collapse" style="flex: 2;">
               <div class="links">
                   <ul>
                       <li th:each="menu, i : ${menuList}">
@@ -52,22 +52,24 @@
                   </ul>
               </div>
           </div>
-          <div class="form" th:if="${username != null}" style="flex: 0.75;">
+          <div class="form" th:if="${username != null}" style="flex: 1;">
               欢迎：[[ ${username} ]]
               <a href="/logout">退出登录</a>
               <a onclick="getArticle()" class="form-bg">发布</a>
           </div>
-          <div class="form" th:if="${username == null}" style="flex: 0.5;">
+          <div class="form" th:if="${username == null}" style="flex: 1;">
               <a href="/login">登录</a>
               <a href="/login" class="form-bg">注册</a>
           </div>
       </div>
-      <!--      文章标题-->
-      <input type="text" id="title" th:value="${article.getTitle()}" placeholder="请输入文章标题" style="width: 50%;height: 50px;font-size: 20px;">
-      <input type="text" id="type" th:value="${article.getTypeId()}" placeholder="请输入文章类型" style="width: 50%;height: 50px;font-size: 20px;float: right">
+      <!-- 文章标题 -->
+      <input type="text" id="title" th:value="${article == null ? '' : article.getTitle()}" placeholder="请输入文章标题" style="width: 50%;height: 50px;font-size: 20px;">
+      <!-- 文章类型 -->
+      <input type="text" id="type" th:value="${article == null ? '' : article.getTypeId()}" placeholder="请输入文章类型" style="width: 50%;height: 50px;font-size: 20px;float: right">
+
   </header>
   <div id="test-editormd">
-      <textarea style="display:none;" th:text="${article.getContent()}"></textarea>
+      <textarea style="display:none;" th:text="${article == null ? '' : article.getContent()}"></textarea>
   </div>
 </div>
 <!--写一个按钮，绑定发布文章的单击事件-->

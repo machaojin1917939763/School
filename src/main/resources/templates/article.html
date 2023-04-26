@@ -129,7 +129,7 @@
 <header class="">
     <div class="navbar" style="display: flex; align-items: center;">
         <a href="" class="logo" style="flex: 1;color: #eb2a21"><i class="fa fa-github"></i>[[${username}]]</a>
-        <div class="collapse" style="flex: 2.5;">
+        <div class="collapse" style="flex: 2;">
             <div class="links">
                 <ul>
                     <li th:each="menu, i : ${menuList}">
@@ -138,11 +138,11 @@
                 </ul>
             </div>
         </div>
-        <div class="form" th:if="${username != null}" style="flex: 0.5;">
+        <div class="form" th:if="${username != null}" style="flex: 1;">
             欢迎：[[ ${username} ]]
             <a href="/login">退出登录</a>
         </div>
-        <div class="form" th:if="${username == null}" style="flex: 0.5;">
+        <div class="form" th:if="${username == null}" style="flex: 1;">
             <a href="/login">登录</a>
             <a href="/login" class="form-bg">注册</a>
         </div>
